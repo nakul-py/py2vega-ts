@@ -1,13 +1,125 @@
-# py2vega-ts
+# py2vega-ts 🐍 -> 📊
 
-Convert Python code to Typescript's Vega expressions with the help of [`py-ast`](https://jsr.io/@kriss-u/py-ast)
+A TypeScript library that converts Python code to Typescript's Vega expressions with the help of [`py-ast`](https://jsr.io/@kriss-u/py-ast)
 
-Run this command to fix linting issues
+## Installation
+
+```bash
+npm install py2vega-ts
+```
+
+## Development
+
+### Setup
+
+```bash
+# Install dependencies
+  npm install
+
+# Build
+  npm run build
+```
+
+### Testing
+
+```bash
+# Run tests
+  npm run test
+```
+
+### Linting
 
 ```bash
 # install pre-commit hooks
-pre-commit install
+  pre-commit install
 
 # fix linting issues
-pre-commit run --all-files
+  pre-commit run --all-files
 ```
+
+## Quick Start
+
+```typescript
+import { py2vegaTs } from 'py2vega-ts';
+
+// Simple comparison
+const vega = py2vegaTs('datum.value > 100');
+console.log(vega);
+// Output: ['>', ['get', 'value'], 100]
+
+// Ternary operator
+const colored = py2vegaTs("'red' if datum.status == 'alert' else 'green'");
+console.log(colored);
+// Output: ['case', ['==', ['get', 'status'], 'alert'], 'red', 'green']
+
+// Complex expression
+const complex = py2vegaTs('abs(datum.value) * 2 if datum.active else 0');
+console.log(complex);
+// Output: ['case', ['get', 'active'], ['*', ['abs', ['get', 'value']], 2], 0]
+```
+
+## 📖 Supported Python Syntax
+
+### Data Access
+
+```python
+datum.field_name          # ['get', 'field_name']
+datum.magnitude           # ['get', 'magnitude']
+datum.coordinates.x       # ['get', 'x', ['get', 'coordinates']]
+```
+
+### Comparisons
+
+```python
+datum.value > 100         # ['>', ['get', 'value'], 100]
+datum.value < 50          # ['<', ['get', 'value'], 50]
+datum.value == 5          # ['==', ['get', 'value'], 5]
+datum.value != 10         # ['!=', ['get', 'value'], 10]
+datum.value >= 100        # ['>=', ['get', 'value'], 100]
+datum.value <= 50         # ['<=', ['get', 'value'], 50]
+datum.a < datum.b         # ['<', ['get', 'a'], ['get', 'b']]
+```
+
+### Arithmetic Operations
+
+```python
+datum.a + datum.b         # ['+', ['get', 'a'], ['get', 'b']]
+datum.a - datum.b         # ['-', ['get', 'a'], ['get', 'b']]
+datum.a * datum.b         # ['*', ['get', 'a'], ['get', 'b']]
+datum.a / datum.b         # ['/', ['get', 'a'], ['get', 'b']]
+datum.a % datum.b         # ['%', ['get', 'a'], ['get', 'b']]
+-datum.value              # ['*', ['get', 'value'], -1]
+```
+
+### Logical Operations
+
+```python
+datum.a > 5 and datum.b < 10
+# ['all', ['>', ['get', 'a'], 5], ['<', ['get', 'b'], 10]]
+
+datum.status == "A" or datum.status == "B"
+# ['any', ['==', ['get', 'status'], 'A'], ['==', ['get', 'status'], 'B']]
+
+not (datum.value > 100)
+# ['!', ['>', ['get', 'value'], 100]]
+```
+
+### Ternary Operator (If-Else)
+
+```python
+42 if datum.value > 100 else 10
+# ['case', ['>', ['get', 'value'], 100], 42, 10]
+
+# Nested ternaries
+'red' if datum.severity > 8 else 'yellow' if datum.severity > 5 else 'green'
+# ['case', ['>', ['get', 'severity'], 8], 'red',
+#            ['case', ['>', ['get', 'severity'], 5], 'yellow', 'green']]
+```
+
+## Related Projects
+
+- **[vega2ol](https://github.com/geojupyter/vega2ol)** - Convert Vega expressions to OpenLayers
+- **[py2vega](https://github.com/QuantStack/py2vega)** - Python package for this functionality
+- **[JupyterGIS](https://github.com/geojupyter/jupytergis)** - Web-based GIS in Jupyter
+
+Made with ❤️ for Jupyter lovers and geospatial enthusiasts.
