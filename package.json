@@ -2,17 +2,6 @@
   "name": "py2vega-ts",
   "version": "0.1.0",
   "description": "Convert Python code to Typescript's Vega expressions.",
-  "author": "Nakul Verma",
-  "license": "BSD-3-Clause",
-  "type": "module",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "directories": {
-        "test": "tests"
-    },
-  "files": [
-    "dist"
-  ],
   "keywords": [
     "python",
     "vega",
@@ -21,14 +10,25 @@
     "transpiler",
     "geospatial"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/nakul-py/py2vega-ts.git"
-  },
+  "homepage": "https://github.com/nakul-py/py2vega-ts#readme",
   "bugs": {
     "url": "https://github.com/nakul-py/py2vega-ts/issues"
   },
-  "homepage": "https://github.com/nakul-py/py2vega-ts#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nakul-py/py2vega-ts.git"
+  },
+  "license": "BSD-3-Clause",
+  "author": "Nakul Verma",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "directories": {
+    "test": "tests"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "test": "node dist/tests/tests.js",
