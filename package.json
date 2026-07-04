@@ -1,6 +1,6 @@
 {
   "name": "py2vega-ts",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Convert Python code to Typescript's Vega expressions.",
   "keywords": [
     "python",
