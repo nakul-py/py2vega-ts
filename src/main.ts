@@ -63,10 +63,22 @@ const FUNCTION_MAPPING: Record<string, string> = {
  * Maps Python constants to Vega constants
  */
 const CONSTANTS_MAPPING: Record<string, string> = {
-  PI: "Math.PI",
-  E: "Math.E",
-  TRUE: "1",
-  FALSE: "0",
+  NaN: "NaN",
+  E: "E",
+  LN2: "LN2",
+  LN10: "LN10",
+  LOG2E: "LOG2E",
+  LOG10E: "LOG10E",
+  MAX_VALUE: "MAX_VALUE",
+  MIN_VALUE: "MIN_VALUE",
+  PI: "PI",
+  SQRT1_2: "SQRT1_2",
+  SQRT2: "SQRT2",
+
+  // Not real Vega constants, but common enough Python-side spellings that
+  // we pass them through as boolean/null literals rather than erroring.
+  TRUE: "true",
+  FALSE: "false",
   None: "null",
 };
 
