@@ -200,6 +200,77 @@ test("not in operator", () => {
 });
 
 //
+// CONSTANTS
+//
+test("PI constant", () => {
+  assertEqual(py2vega("PI"), "PI", "PI");
+});
+
+test("E constant", () => {
+  assertEqual(py2vega("E"), "E", "E");
+});
+
+test("NaN constant", () => {
+  assertEqual(py2vega("NaN"), "NaN", "NaN");
+});
+
+test("LN2 constant", () => {
+  assertEqual(py2vega("LN2"), "LN2", "LN2");
+});
+
+test("LN10 constant", () => {
+  assertEqual(py2vega("LN10"), "LN10", "LN10");
+});
+
+test("LOG2E constant", () => {
+  assertEqual(py2vega("LOG2E"), "LOG2E", "LOG2E");
+});
+
+test("LOG10E constant", () => {
+  assertEqual(py2vega("LOG10E"), "LOG10E", "LOG10E");
+});
+
+test("MAX_VALUE constant", () => {
+  assertEqual(py2vega("MAX_VALUE"), "MAX_VALUE", "MAX_VALUE");
+});
+
+test("MIN_VALUE constant", () => {
+  assertEqual(py2vega("MIN_VALUE"), "MIN_VALUE", "MIN_VALUE");
+});
+
+test("SQRT1_2 constant", () => {
+  assertEqual(py2vega("SQRT1_2"), "SQRT1_2", "SQRT1_2");
+});
+
+test("SQRT2 constant", () => {
+  assertEqual(py2vega("SQRT2"), "SQRT2", "SQRT2");
+});
+
+test("True constant", () => {
+  assertEqual(py2vega("True"), "true", "True -> true");
+});
+
+test("False constant", () => {
+  assertEqual(py2vega("False"), "false", "False -> false");
+});
+
+test("None constant", () => {
+  assertEqual(py2vega("None"), "null", "None -> null");
+});
+
+test("constant used in an expression", () => {
+  assertEqual(
+    py2vega("datum.value > PI"),
+    "datum.value > PI",
+    "constant in comparison"
+  );
+});
+
+test("constant in a function call", () => {
+  assertEqual(py2vega("abs(E)"), "abs(E)", "constant as function arg");
+});
+
+//
 // ERROR HANDLING
 //
 
