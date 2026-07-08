@@ -57,6 +57,7 @@ const FUNCTION_MAPPING: Record<string, string> = {
   type: "type",
   int: "int",
   float: "float",
+  rgb: "rgb",
 };
 
 /**
