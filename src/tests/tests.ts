@@ -129,6 +129,14 @@ test("function call", () => {
   assertEqual(py2vega("abs(datum.value)"), "abs(datum.value)", "abs()");
 });
 
+test("rgb function call", () => {
+  assertEqual(
+    py2vega("rgb(255, 0, 0)"),
+    "rgb(255, 0, 0)",
+    "rgb()"
+  );
+});
+
 //
 // BOOLEAN LOGIC
 //
