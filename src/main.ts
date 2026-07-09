@@ -1,4 +1,9 @@
 import { parse as pyparse } from "py-ast";
+import {
+  OPERATOR_MAPPING,
+  CONSTANTS_MAPPING,
+  FUNCTION_MAPPING,
+} from "./maps.js";
 
 /**
  * Vega expression value types
@@ -9,80 +14,6 @@ interface PyNode {
   nodeType: string;
   [key: string]: any;
 }
-
-/**
- * Maps Python operators to Vega operators
- */
-const OPERATOR_MAPPING: Record<string, string> = {
-  Eq: "==",
-  NotEq: "!=",
-  Lt: "<",
-  LtE: "<=",
-  Gt: ">",
-  GtE: ">=",
-  And: "&&",
-  Or: "||",
-  Add: "+",
-  Sub: "-",
-  Mult: "*",
-  Div: "/",
-  Mod: "%",
-  BitAnd: "&",
-  BitOr: "|",
-  Pow: "**",
-};
-
-/**
- * Maps Python functions to Vega functions
- */
-
-const FUNCTION_MAPPING: Record<string, string> = {
-  abs: "abs",
-  floor: "floor",
-  ceil: "ceil",
-  round: "round",
-  sqrt: "sqrt",
-  pow: "pow",
-  log: "log",
-  exp: "exp",
-  sin: "sin",
-  cos: "cos",
-  tan: "tan",
-  str: "toString",
-  bool: "toBoolean",
-  sorted: "sort",
-  upper: "upper",
-  lower: "lower",
-  len: "length",
-  min: "min",
-  max: "max",
-  float: "toNumber",
-  rgb: "rgb",
-  reversed: "reverse",
-};
-
-/**
- * Maps Python constants to Vega constants
- */
-const CONSTANTS_MAPPING: Record<string, string> = {
-  NaN: "NaN",
-  E: "E",
-  LN2: "LN2",
-  LN10: "LN10",
-  LOG2E: "LOG2E",
-  LOG10E: "LOG10E",
-  MAX_VALUE: "MAX_VALUE",
-  MIN_VALUE: "MIN_VALUE",
-  PI: "PI",
-  SQRT1_2: "SQRT1_2",
-  SQRT2: "SQRT2",
-
-  // Not real Vega constants, but common enough Python-side spellings that
-  // we pass them through as boolean/null literals rather than erroring.
-  TRUE: "true",
-  FALSE: "false",
-  None: "null",
-};
 
 /**
  * Custom error class for py2vega transpilation
@@ -140,8 +71,8 @@ class PyToVegaVisitor {
   visitConstant(node: PyNode): VegaValue {
     const { value } = node;
 
-    if (value === null) return "null";
-    if (typeof value === "boolean") return value ? "true" : "false";
+    if (value === null) return "null"; // None
+    if (typeof value === "boolean") return value ? "true" : "false"; // TRUE / FALSE
     if (typeof value === "number") return String(value);
 
     if (typeof value === "string") {
@@ -307,6 +238,12 @@ class PyToVegaVisitor {
       funcName = node.func.attr;
     } else {
       throw new Py2VegaError("Unsupported function call");
+    }
+
+    if (node.keywords && node.keywords.length > 0) {
+      throw new Py2VegaError(
+        `Keyword arguments are not supported: ${funcName}()`
+      );
     }
 
     const vegaFunc = FUNCTION_MAPPING[funcName.toLowerCase()];
