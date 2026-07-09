@@ -125,15 +125,67 @@ test("complex ternary", () => {
 //
 // FUNCTIONS
 //
-test("function call", () => {
+test("abs function call", () => {
   assertEqual(py2vega("abs(datum.value)"), "abs(datum.value)", "abs()");
 });
 
 test("rgb function call", () => {
+  assertEqual(py2vega("rgb(255, 0, 0)"), "rgb(255, 0, 0)", "rgb()");
+});
+
+test("upper function call", () => {
+  assertEqual(py2vega("upper(datum.name)"), "upper(datum.name)", "upper()");
+});
+
+test("lower function call", () => {
+  assertEqual(py2vega("lower(datum.name)"), "lower(datum.name)", "lower()");
+});
+
+test("sort function call", () => {
+  assertEqual(py2vega("sorted(datum.name)"), "sort(datum.name)", "sort()");
+});
+
+test("len function call", () => {
+  assertEqual(py2vega("len(datum.name)"), "length(datum.name)", "len()");
+});
+
+test("max function call", () => {
+  assertEqual(py2vega("max(datum.name)"), "max(datum.name)", "max()");
+});
+
+test("min function call", () => {
+  assertEqual(py2vega("min(datum.name)"), "min(datum.name)", "min()");
+});
+
+test("str function call", () => {
+  assertEqual(py2vega("str(datum.name)"), "toString(datum.name)", "str()");
+});
+
+test("bool function call", () => {
+  assertEqual(py2vega("bool(datum.name)"), "toBoolean(datum.name)", "bool()");
+});
+
+test("float function call", () => {
+  assertEqual(py2vega("float(datum.name)"), "toNumber(datum.name)", "float()");
+});
+
+test("floor function call", () => {
+  assertEqual(py2vega("floor(datum.name)"), "floor(datum.name)", "floor()");
+});
+
+test("ceil function call", () => {
+  assertEqual(py2vega("ceil(datum.name)"), "ceil(datum.name)", "ceil()");
+});
+
+test("round function call", () => {
+  assertEqual(py2vega("round(datum.name)"), "round(datum.name)", "round()");
+});
+
+test("reverse function call", () => {
   assertEqual(
-    py2vega("rgb(255, 0, 0)"),
-    "rgb(255, 0, 0)",
-    "rgb()"
+    py2vega("reversed(datum.name)"),
+    "reverse(datum.name)",
+    "reverse()"
   );
 });
 
