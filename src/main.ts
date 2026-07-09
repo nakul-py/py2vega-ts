@@ -246,7 +246,7 @@ class PyToVegaVisitor {
       );
     }
 
-    const vegaFunc = FUNCTION_MAPPING[funcName.toLowerCase()];
+    const vegaFunc = FUNCTION_MAPPING[funcName];
     if (!vegaFunc) {
       throw new Py2VegaError(`Unsupported function: ${funcName}`);
     }
