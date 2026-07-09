@@ -49,15 +49,16 @@ const FUNCTION_MAPPING: Record<string, string> = {
   cos: "cos",
   tan: "tan",
   str: "toString",
-  upper: "toUpperCase",
-  lower: "toLowerCase",
+  bool: "toBoolean",
+  sorted: "sort",
+  upper: "upper",
+  lower: "lower",
   len: "length",
   min: "min",
   max: "max",
-  type: "type",
-  int: "int",
-  float: "float",
+  float: "toNumber",
   rgb: "rgb",
+  reversed: "reverse",
 };
 
 /**
