@@ -3,7 +3,7 @@ import {
   OPERATOR_MAPPING,
   CONSTANTS_MAPPING,
   FUNCTION_MAPPING,
-} from "./maps.js";
+} from "./constants.js";
 
 /**
  * Vega expression value types
