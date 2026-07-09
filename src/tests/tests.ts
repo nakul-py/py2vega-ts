@@ -181,11 +181,183 @@ test("round function call", () => {
   assertEqual(py2vega("round(datum.name)"), "round(datum.name)", "round()");
 });
 
+test("trim function call", () => {
+  assertEqual(py2vega("trim(datum.name)"), "trim(datum.name)", "trim()");
+});
+
+test("hsl function call", () => {
+  assertEqual(py2vega("hsl(120, 1, 0.5)"), "hsl(120, 1, 0.5)", "hsl()");
+});
+
+test("year function call", () => {
+  assertEqual(py2vega("year(datum.date)"), "year(datum.date)", "year()");
+});
+
+test("month function call", () => {
+  assertEqual(py2vega("month(datum.date)"), "month(datum.date)", "month()");
+});
+
+test("now function call", () => {
+  assertEqual(py2vega("now()"), "now()", "now()");
+});
+
+test("sqrt function call", () => {
+  assertEqual(py2vega("sqrt(datum.value)"), "sqrt(datum.value)", "sqrt()");
+});
+
+test("pow function call", () => {
+  assertEqual(py2vega("pow(datum.value, 2)"), "pow(datum.value, 2)", "pow()");
+});
+
+test("isNaN function call", () => {
+  assertEqual(py2vega("isNaN(datum.value)"), "isNaN(datum.value)", "isNaN()");
+});
+
+test("span function call", () => {
+  assertEqual(py2vega("span(datum.values)"), "span(datum.values)", "span()");
+});
+
 test("reverse function call", () => {
   assertEqual(
     py2vega("reversed(datum.name)"),
     "reverse(datum.name)",
     "reverse()"
+  );
+});
+
+test("isValid function call", () => {
+  assertEqual(
+    py2vega("isValid(datum.value)"),
+    "isValid(datum.value)",
+    "isValid()"
+  );
+});
+
+test("isNumber function call", () => {
+  assertEqual(
+    py2vega("isNumber(datum.value)"),
+    "isNumber(datum.value)",
+    "isNumber()"
+  );
+});
+
+test("isString function call", () => {
+  assertEqual(
+    py2vega("isString(datum.value)"),
+    "isString(datum.value)",
+    "isString()"
+  );
+});
+
+test("isArray function call", () => {
+  assertEqual(
+    py2vega("isArray(datum.value)"),
+    "isArray(datum.value)",
+    "isArray()"
+  );
+});
+
+test("clamp function call", () => {
+  assertEqual(
+    py2vega("clamp(datum.value, 0, 100)"),
+    "clamp(datum.value, 0, 100)",
+    "clamp()"
+  );
+});
+
+test("isFinite function call", () => {
+  assertEqual(
+    py2vega("isFinite(datum.value)"),
+    "isFinite(datum.value)",
+    "isFinite()"
+  );
+});
+
+test("indexof function call", () => {
+  assertEqual(
+    py2vega("indexof(datum.values, 3)"),
+    "indexof(datum.values, 3)",
+    "indexof()"
+  );
+});
+
+test("slice function call", () => {
+  assertEqual(
+    py2vega("slice(datum.values, 1, 3)"),
+    "slice(datum.values, 1, 3)",
+    "slice()"
+  );
+});
+
+test("extent function call", () => {
+  assertEqual(
+    py2vega("extent(datum.values)"),
+    "extent(datum.values)",
+    "extent()"
+  );
+});
+
+test("join function call", () => {
+  assertEqual(
+    py2vega("join(datum.values, ',')"),
+    "join(datum.values, ',')",
+    "join()"
+  );
+});
+
+test("replace function call", () => {
+  assertEqual(
+    py2vega("replace(datum.name, 'a', 'b')"),
+    "replace(datum.name, 'a', 'b')",
+    "replace()"
+  );
+});
+
+test("split function call", () => {
+  assertEqual(
+    py2vega("split(datum.name, ',')"),
+    "split(datum.name, ',')",
+    "split()"
+  );
+});
+
+test("substring function call", () => {
+  assertEqual(
+    py2vega("substring(datum.name, 0, 3)"),
+    "substring(datum.name, 0, 3)",
+    "substring()"
+  );
+});
+
+test("truncate function call", () => {
+  assertEqual(
+    py2vega("truncate(datum.name, 10)"),
+    "truncate(datum.name, 10)",
+    "truncate()"
+  );
+});
+
+test("format function call", () => {
+  assertEqual(
+    py2vega("format(datum.value, ',.2f')"),
+    "format(datum.value, ',.2f')",
+    "format()"
+  );
+});
+
+test("timeFormat function call", () => {
+  assertEqual(
+    py2vega("timeFormat(datum.date, '%A')"),
+    "timeFormat(datum.date, '%A')",
+    "timeFormat()"
+  );
+});
+
+test("luminance function call", () => {
+  assertEqual(
+    py2vega("luminance(datum.color)"),
+    "luminance(datum.color)",
+    "luminance()"
   );
 });
 
